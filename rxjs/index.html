@@ -1,0 +1,48 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>RxJS</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1"> 
+        <script src="https://unpkg.com/rxjs@5.0.2/bundles/Rx.min.js"></script>
+    </head>
+    <body>
+        <input type="button" value="Click me!!" id="btn">
+        <script>
+            (function(){
+                
+                // From Multiple Values
+                Rx.Observable.of('foo', 'bar', 123 , {"foo":"bar" }).subscribe(function(v){
+                    console.log(v);
+                });
+
+                // From Array
+                Rx.Observable
+                    .from([1,2,3])
+                    .subscribe(function(value){
+                        console.log(value);
+                    },function(err){
+                        console.log(err);
+                    },function(complete){
+                        console.log("Completed");
+                    });
+                
+                // From Event
+                Rx.Observable
+                    .fromEvent(document.getElementById('btn'), 'click')
+                    .subscribe(function(e){
+                        alert("Clicked");
+                    });
+                
+                // Create Observable
+                var myObservable = Rx.Observable.create(observer => {
+                    observer.next('foo');
+                });
+                myObservable.subscribe(value => console.log(value));
+
+            })();            
+        </script>
+    </body>
+</html>
