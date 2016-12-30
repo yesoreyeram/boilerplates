@@ -1,0 +1,23 @@
+// https://netbasal.com/angular-2-ngfor-array-with-unique-values-6b15478d6484
+import { Component } from "@angular/core";
+@Component({
+  selector: 'ngfor-with-unique-values',
+  template: `
+    <ul>
+     <li *ngFor="let recipient of recipients">
+      {{recipient}}
+     </li>
+    </ul>
+    <input type="text" placeholder="Recipient" #input />
+    <button (click)="addRecipient(input.value)">Add recipient</button>
+    <p>Number of recipients: {{recipients.size}}</p>
+  `,
+})
+export class UniqueNgForComponent {
+  constructor() {
+    this.recipients = new Set();
+  }
+  addRecipient(recipient) {
+    this.recipients.add(recipient);
+  }
+}
